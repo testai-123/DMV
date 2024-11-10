@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load the sales data from CSV file
-sales_data = pd.read_csv("sample_7.csv")
+sales_data = pd.read_csv("C:\\Users\\aksha\\Downloads\\sample_7.csv")
 print("CSV Data Preview:")
 print(sales_data.head())
 
@@ -29,16 +29,19 @@ sales_data['Sales'] = sales_data['Sales'].astype(int)
 sales_data['Channel'].fillna('Not known', inplace=True)
 sales_data['Channel'] = sales_data['Channel'].replace(['offline', 'online'], [0, 1])
 
-# Step 4: Data Transformation
-# Split 'start_date' into separate 'Year', 'Month', and 'Day' columns
-sales_data[['Year', 'Month', 'Day']] = sales_data['start_date'].str.split('-', expand=True)
+
 
 # Additional data merging from other files, if available
-df_file1 = pd.read_csv('file1_7.csv')
-df_file2 = pd.read_csv('file2_7.csv')
+df_file1 = pd.read_csv("C:\\Users\\aksha\\Downloads\\file1_7.csv")
+df_file2 = pd.read_csv("C:\\Users\\aksha\\Downloads\\file2_7.csv")
 merged_df = pd.concat([df_file1, df_file2], ignore_index=True)
 print("\nMerged DataFrame:")
 print(merged_df.head())
+
+
+# Step 4: Data Transformation
+# Split 'start_date' into separate 'Year', 'Month', and 'Day' columns
+merged_df[['Year', 'Month', 'Day']] = merged_df['start_date'].str.split('-', expand=True)
 
 # Step 5: Descriptive Statistics and Analysis
 # Total sales, average order value, product category distribution
@@ -54,11 +57,6 @@ print("\nProduct Category Distribution:\n", product_category_distribution)
 # Average sales by channel
 average_sales_by_channel = sales_data.groupby('Channel')['Sales'].mean()
 print("\nAverage Sales by Channel:\n", average_sales_by_channel)
-
-# Average sales by month
-sales_data['Month'] = sales_data['Month'].astype(int)  # Ensure 'Month' is numeric
-average_sales_by_month = sales_data.groupby('Month')['Sales'].mean()
-print("\nAverage Sales by Month:\n", average_sales_by_month)
 
 # Aggregated sales by product type
 grouped_sales = sales_data.groupby('P Type')['Sales'].sum()
@@ -89,14 +87,4 @@ plt.title('Sales Distribution by Channel')
 plt.suptitle('')
 plt.xlabel('Channel (0: Offline, 1: Online)')
 plt.ylabel('Sales')
-plt.show()
-
-# Line plot: Average Sales by Month for seasonal trend analysis
-plt.figure(figsize=(10, 6))
-average_sales_by_month.plot(kind='line', marker='o', color='orange')
-plt.title('Average Sales by Month')
-plt.xlabel('Month')
-plt.ylabel('Average Sales')
-plt.grid(True)
-plt.tight_layout()
 plt.show()
