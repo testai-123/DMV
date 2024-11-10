@@ -1,59 +1,44 @@
 import requests
-import folium
 
-def get_weather_data(city):
-    """Fetch weather data for a given city."""
-    API_KEY = "3feca6bf43580bfaa2aa7edb85929cf1"
-    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}"
-    response = requests.get(url).json()
-    return response
+API_KEY = '3feca6bf43580bfaa2aa7edb85929cf1'
+CITY = 'Pune'
+BASE_URL = 'http://api.openweathermap.org/data/2.5/weather'
 
-def clean_data(data):
-    """Clean and extract relevant weather information."""
-    if data.get('cod') == 200:
-        return {
-            'temperature': data['main'].get('temp'),
-            'humidity': data['main'].get('humidity'),
-            'wind_speed': data['wind'].get('speed'),
-            'latitude': data['coord'].get('lat'),
-            'longitude': data['coord'].get('lon')
-        }
-    else:
-        print(f"Error: {data.get('message')}")
-        return None
+params = {
+    'q': CITY,
+    'appid': API_KEY,
+    'units': 'metric'  # Use 'imperial' for Fahrenheit
+}
 
-def create_weather_map(weather_data):
-    """Generate a map with weather data points."""
-    map_center = [weather_data[0]['latitude'], weather_data[0]['longitude']]
-    weather_map = folium.Map(location=map_center, zoom_start=4)
+response = requests.get(BASE_URL, params=params)
+weather_data = response.json()
 
-    for data in weather_data:
-        popup_content = (
-            f"<strong>Temperature:</strong> {data['temperature']} K<br>"
-            f"<strong>Humidity:</strong> {data['humidity']}%<br>"
-            f"<strong>Wind Speed:</strong> {data['wind_speed']} m/s"
-        )
-        folium.Marker(
-            location=[data['latitude'], data['longitude']],
-            popup=folium.Popup(popup_content, parse_html=True)
-        ).add_to(weather_map)
+print(weather_data)  # Check the response structure
 
-    weather_map.save('weather_map.html')
-    print('Map saved as "weather_map.html".')
+temperature = weather_data['main']['temp']
+humidity = weather_data['main']['humidity']
+wind_speed = weather_data['wind']['speed']
+precipitation = weather_data.get('rain', {}).get('1h', 0)  # 1-hour precipitation
 
-def main():
-    """Main function to get weather data and create a map."""
-    cities = ["London", "New York", "Tokyo"]
-    weather_data = []
+print(f'Temperature: {temperature}°C, Humidity: {humidity}%, Wind Speed: {wind_speed} m/s, Precipitation: {precipitation} mm')
 
-    for city in cities:
-        data = get_weather_data(city)
-        cleaned_data = clean_data(data)
-        if cleaned_data:
-            weather_data.append(cleaned_data)
+import pandas as pd
 
-    if weather_data:
-        create_weather_map(weather_data)
+# Example DataFrame
+data = {
+    'temperature': [temperature],
+    'humidity': [humidity],
+    'wind_speed': [wind_speed],
+    'precipitation': [precipitation]
+}
 
-if __name__ == "__main__":
-    main()
+df = pd.DataFrame(data)
+
+# Handling missing values
+df.fillna(0, inplace=True)
+
+average_temperature = df['temperature'].mean()
+max_temperature = df['temperature'].max()
+min_temperature = df['temperature'].min()
+
+print(f'Avg: {average_temperature}, Max: {max_temperature}, Min: {min_temperature}')
