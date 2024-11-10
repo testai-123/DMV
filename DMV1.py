@@ -1,3 +1,40 @@
+'''
+Data Loading, Storage and File Formats
+Problem Statement: Analyzing Sales Data from Multiple File Formats
+Dataset: Sales data in multiple file formats (e.g., CSV, Excel, JSON)
+Description: The goal is to load and analyze sales data from different file formats, including
+CSV, Excel, and JSON, and perform data cleaning, transformation, and analysis on the
+dataset.
+Tasks to Perform:
+Obtain sales data files in various formats, such as CSV, Excel, and JSON.
+1. Load the sales data from each file format into the appropriate data structures or
+dataframes.
+2. Explore the structure and content of the loaded data, identifying any inconsistencies,
+missing values, or data quality issues.
+3. Perform data cleaning operations, such as handling missing values, removing
+duplicates, or correcting inconsistencies.
+4. Convert the data into a unified format, such as a common dataframe or data structure,
+to enable seamless analysis.
+Data Loading, Storage and File Formats
+Problem Statement: Analyzing Sales Data from Multiple File Formats
+Dataset: Sales data in multiple file formats (e.g., CSV, Excel, JSON)
+Description: The goal is to load and analyze sales data from different file formats, including
+CSV, Excel, and JSON, and perform data cleaning, transformation, and analysis on the
+dataset.
+Tasks to Perform:
+Obtain sales data files in various formats, such as CSV, Excel, and JSON.
+1. Load the sales data from each file format into the appropriate data structures or
+dataframes.
+2. Explore the structure and content of the loaded data, identifying any inconsistencies,
+missing values, or data quality issues.
+3. Perform data cleaning operations, such as handling missing values, removing
+duplicates, or correcting inconsistencies.
+4. Convert the data into a unified format, such as a common dataframe or data structure,
+to enable seamless analysis.
+
+'''
+
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
