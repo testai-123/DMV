@@ -76,9 +76,11 @@ print(f"\nTotal Sales: {total_sales}")
 print(f"Average Order Value: {average_order_value:.2f}")
 print("\nProduct Category Distribution:\n", product_category_distribution)
 
+grouped_sales = sales_data.groupby('P Type')['Sales'].sum()
+
 # Visualization: Total Sales by Product Type
 plt.figure(figsize=(10, 6))
-sales_data.groupby('P Type')['Sales'].sum().plot(kind='bar', color='skyblue')
+grouped_sales.plot(kind='bar', color='skyblue')
 plt.title('Total Sales by Product Type')
 plt.xlabel('Product Type')
 plt.ylabel('Total Sales')
