@@ -43,7 +43,7 @@ grouped_sales = sales_data.groupby('P Type')['Sales'].sum()
 
 # Visualization: Total Sales by Product Type
 plt.figure(figsize=(10, 6))
-sns.barplot(x='P Type', y='Sales', data=grouped_sales, color='skyblue')
+grouped_sales.plot(kind='bar')
 plt.title('Total Sales by Product Type')
 plt.xlabel('Product Type')
 plt.ylabel('Total Sales')
