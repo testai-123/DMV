@@ -2,7 +2,7 @@ import pandas as pd
 from scipy import stats
 
 # Load dataset
-df = pd.read_csv("C:\\Users\\aksha\\Downloads\\DMV4.csv")
+df = pd.read_csv("C:\\DMV4.csv")
 
 # Clean column names (spaces and special characters removed)
 df.columns = df.columns.str.replace(' ', '_').str.replace(r'\W', '', regex=True)
