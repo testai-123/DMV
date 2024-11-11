@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load the sales data from CSV file
-sales_data = pd.read_csv("C:\\Users\\aksha\\Downloads\\sample_7.csv")
+sales_data = pd.read_csv("sample_7.csv")
 print("CSV Data Preview:")
 print(sales_data.head())
 
@@ -32,8 +32,8 @@ sales_data['Channel'] = sales_data['Channel'].replace(['offline', 'online'], [0,
 
 
 # Additional data merging from other files, if available
-df_file1 = pd.read_csv("C:\\Users\\aksha\\Downloads\\file1_7.csv")
-df_file2 = pd.read_csv("C:\\Users\\aksha\\Downloads\\file2_7.csv")
+df_file1 = pd.read_csv("file1_7.csv")
+df_file2 = pd.read_csv("file2_7.csv")
 merged_df = pd.concat([df_file1, df_file2], ignore_index=True)
 print("\nMerged DataFrame:")
 print(merged_df.head())
